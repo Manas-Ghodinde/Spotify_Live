@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Live - Strategic Partnership | by Manas Ghodinde</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .presentation-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1DB954;
+        }
+
+        .nav-logo i {
+            font-size: 24px;
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #1DB954;
+            transform: scale(1.2);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: #1DB954;
+            transform: scale(1.1);
+        }
+
+        .slides-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 50px 50px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-section {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .logo-large {
+            font-size: 120px;
+            color: #1DB954;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        .title-section h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-section h2 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+        }
+
+        .music-waves {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 40px;
+        }
+
+        .wave {
+            width: 6px;
+            height: 60px;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+            border-radius: 3px;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        .wave:nth-child(2) { animation-delay: 0.1s; }
+        .wave:nth-child(3) { animation-delay: 0.2s; }
+        .wave:nth-child(4) { animation-delay: 0.3s; }
+        .wave:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { height: 20px; }
+            50% { height: 80px; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .slide-header h2 {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .slide-header i {
+            font-size: 40px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-10px);
+            border-color: #1DB954;
+            box-shadow: 0 20px 40px rgba(29, 185, 84, 0.2);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .summary-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .summary-card p {
+            color: #b3b3b3;
+            line-height: 1.6;
+        }
+
+        .vision-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .vision-main {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .vision-main h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1DB954;
+        }
+
+        .vision-main p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #b3b3b3;
+        }
+
+        .vision-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .pillar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pillar:hover {
+            border-color: #1DB954;
+            transform: translateX(10px);
+        }
+
+        .pillar-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .pillar h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .pillar p {
+            color: #b3b3b3;
+            line-height: 1.5;
+        }
+
+        .tracks-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .track-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .track-section:hover {
+            transform: translateY(-5px);
+            border-color: #1DB954;
+        }
+
+        .track-header {
+            padding: 25px 30px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .track-header.track-1 {
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+        }
+
+        .track-header.track-2 {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        }
+
+        .track-header h3 {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .track-content {
+            padding: 30px;
+        }
+
+        .track-item {
+            margin-bottom: 30px;
+        }
+
+        .track-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .track-item h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1DB954;
+        }
+
+        .track-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .track-item li {
+            padding: 8px 0;
+            color: #b3b3b3;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .track-item li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1DB954;
+            font-weight: bold;
+        }
+
+        .journey-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .journey-step {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .journey-step:hover {
+            transform: translateY(-10px);
+            border-color: #1DB954;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            color: white;
+        }
+
+        .step-content h4 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .step-content p {
+            color: #b3b3b3;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .step-icon {
+            font-size: 32px;
+            color: #1DB954;
+        }
+
+        .vision-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            border-color: #1DB954;
+        }
+
+        .timeline-year {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1DB954;
+            margin-bottom: 15px;
+        }
+
+        .timeline-content h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .timeline-content p {
+            color: #b3b3b3;
+            line-height: 1.6;
+        }
+
+        .vision-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: #1DB954;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #b3b3b3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #1DB954, #1ed760);
+            width: 16.67%;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-counter {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #b3b3b3;
+            margin-left: 20px;
+        }
+        
+        .current-slide {
+            color: #1DB954;
+            font-weight: 600;
+        }
+        
+        .separator {
+            color: #b3b3b3;
+        }
+        
+        .total-slides {
+            color: #b3b3b3;
+        }
+        
+        .fullscreen-btn {
+            margin-left: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 100px 30px 50px;
+            }
+            
+            .title-section h1 {
+                font-size: 56px;
+            }
+            
+            .title-section h2 {
+                font-size: 28px;
+            }
+            
+            .slide-header h2 {
+                font-size: 36px;
+            }
+            
+            .vision-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .tracks-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .vision-timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .vision-stats {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .presentation-nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-logo {
+                font-size: 16px;
+            }
+            
+            .nav-logo i {
+                font-size: 20px;
+            }
+            
+            .slide {
+                padding: 80px 20px 40px;
+            }
+            
+            .title-section h1 {
+                font-size: 40px;
+            }
+            
+            .title-section h2 {
+                font-size: 24px;
+            }
+            
+            .logo-large {
+                font-size: 80px;
+            }
+            
+            .slide-header h2 {
+                font-size: 28px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .vision-timeline {
+                grid-template-columns: 1fr;
+            }
+            
+            .vision-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .journey-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <nav class="presentation-nav">
+            <div class="nav-logo">
+                <i class="fab fa-spotify"></i>
+                <span>Spotify Live</span>
+            </div>
+            <div class="nav-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+                <span class="dot" data-slide="4"></span>
+                <span class="dot" data-slide="5"></span>
+            </div>
+            <div class="nav-controls">
+                <button class="nav-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="slides-container">
+            <div class="slide active" id="slide-0">
+                <div class="slide-content">
+                    <div class="title-section">
+                        <div class="logo-large">
+                            <i class="fab fa-spotify"></i>
+                        </div>
+                        <h1>Spotify Live</h1>
+                        <h2>Strategic Partnership Presentation</h2>
+                        <p class="subtitle">Revolutionizing Live Music Experience</p>
+                        <div class="music-waves">
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" id="slide-1">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2><i class="fas fa-chart-line"></i> Executive Summary</h2>
+                    </div>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Global Reach</h3>
+                            <p>Connect with millions of music lovers worldwide through live streaming experiences</p>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h3>Artist Empowerment</h3>
+                            <p>Provide artists with new revenue streams and direct fan engagement opportunities</p>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3>Innovation</h3>
+                            <p>Pioneering the future of live music with cutting-edge technology and immersive experiences</p>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>Partnership</h3>
+                            <p>Strategic collaboration to create sustainable, mutually beneficial relationships</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" id="slide-2">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2><i class="fas fa-eye"></i> Strategic Vision</h2>
+                    </div>
+                    <div class="vision-content">
+                        <div class="vision-main">
+                            <h3>Our Mission</h3>
+                            <p>To democratize live music by creating accessible, high-quality streaming experiences that connect artists and fans in real-time, fostering a global community of music enthusiasts.</p>
+                        </div>
+                        <div class="vision-pillars">
+                            <div class="pillar">
+                                <div class="pillar-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div>
+                                    <h4>Global Accessibility</h4>
+                                    <p>Make live music available to anyone, anywhere, anytime</p>
+                                </div>
+                            </div>
+                            <div class="pillar">
+                                <div class="pillar-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div>
+                                    <h4>Artist Growth</h4>
+                                    <p>Empower artists with tools and platforms for success</p>
+                                </div>
+                            </div>
+                            <div class="pillar">
+                                <div class="pillar-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div>
+                                    <h4>Fan Engagement</h4>
+                                    <p>Create meaningful connections between artists and audiences</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" id="slide-3">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2><i class="fas fa-road"></i> Two-Track Partnership Strategy</h2>
+                    </div>
+                    <div class="tracks-container">
+                        <div class="track-section">
+                            <div class="track-header track-1">
+                                <h3><i class="fas fa-broadcast-tower"></i> Track 1: Spotify Studio Sessions</h3>
+                            </div>
+                            <div class="track-content">
+                                <div class="track-item">
+                                    <h4>Partnership Framework</h4>
+                                    <ul>
+                                        <li>Exclusive studio recording sessions</li>
+                                        <li>High-quality production facilities</li>
+                                        <li>Professional audio engineering support</li>
+                                        <li>Multi-platform content distribution</li>
+                                    </ul>
+                                </div>
+                                <div class="track-item">
+                                    <h4>Format Features</h4>
+                                    <ul>
+                                        <li>Intimate acoustic performances</li>
+                                        <li>Behind-the-scenes content</li>
+                                        <li>Fan Q&A integration</li>
+                                        <li>Merchandise integration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="track-section">
+                            <div class="track-header track-2">
+                                <h3><i class="fas fa-search"></i> Track 2: Spotify Spotlight Program</h3>
+                            </div>
+                            <div class="track-content">
+                                <div class="track-item">
+                                    <h4>Artist Selection Criteria</h4>
+                                    <ul>
+                                        <li>Emerging talent with unique sound</li>
+                                        <li>Active social media presence</li>
+                                        <li>Consistent content creation</li>
+                                        <li>Fan engagement metrics</li>
+                                    </ul>
+                                </div>
+                                <div class="track-item">
+                                    <h4>Implementation Structure</h4>
+                                    <ul>
+                                        <li>Quarterly artist discovery cycles</li>
+                                        <li>Mentorship and development programs</li>
+                                        <li>Marketing and promotion support</li>
+                                        <li>Performance analytics and insights</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" id="slide-4">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2><i class="fas fa-route"></i> User Experience Journey</h2>
+                    </div>
+                    <div class="journey-container">
+                        <div class="journey-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Discovery</h4>
+                                <p>Users discover live sessions through personalized recommendations and trending content</p>
+                                <div class="step-icon">
+                                    <i class="fas fa-compass"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Engagement</h4>
+                                <p>Interactive features allow real-time participation, comments, and reactions</p>
+                                <div class="step-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Connection</h4>
+                                <p>Fans connect with artists through exclusive content and community features</p>
+                                <div class="step-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Retention</h4>
+                                <p>Ongoing engagement through follow-up content and exclusive experiences</p>
+                                <div class="step-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" id="slide-5">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2><i class="fas fa-crystal-ball"></i> Long Term Vision</h2>
+                    </div>
+                    <div class="vision-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2024</div>
+                            <div class="timeline-content">
+                                <h4>Foundation Phase</h4>
+                                <p>Launch core platform features and establish initial artist partnerships</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2025</div>
+                            <div class="timeline-content">
+                                <h4>Expansion Phase</h4>
+                                <p>Scale to global markets and introduce advanced interactive features</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2026</div>
+                            <div class="timeline-content">
+                                <h4>Innovation Phase</h4>
+                                <p>Integrate AR/VR experiences and AI-powered personalization</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2027+</div>
+                            <div class="timeline-content">
+                                <h4>Transformation Phase</h4>
+                                <p>Become the leading platform for live music experiences worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vision-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">100M+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Artists</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1M+</div>
+                            <div class="stat-label">Live Sessions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        class PresentationController {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = 6;
+                this.isTransitioning = false;
+                
+                this.initializeElements();
+                this.bindEvents();
+                this.updateProgress();
+            }
+
+            initializeElements() {
+                this.slides = document.querySelectorAll('.slide');
+                this.dots = document.querySelectorAll('.dot');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.progressFill = document.querySelector('.progress-fill');
+            }
+
+            bindEvents() {
+                this.prevBtn.addEventListener('click', () => this.previousSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (this.isTransitioning) return;
+                    
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            this.previousSlide();
+                            break;
+                        case 'ArrowRight':
+                        case ' ':
+                            e.preventDefault();
+                            this.nextSlide();
+                            break;
+                        case 'Home':
+                            e.preventDefault();
+                            this.goToSlide(0);
+                            break;
+                        case 'End':
+                            e.preventDefault();
+                            this.goToSlide(this.totalSlides - 1);
+                            break;
+                    }
+                });
+
+                let startX = 0;
+                let startY = 0;
+
+                document.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                });
+
+                document.addEventListener('touchend', (e) => {
+                    if (this.isTransitioning) return;
+
+                    const endX = e.changedTouches[0].clientX;
+                    const endY = e.changedTouches[0].clientY;
+                    const diffX = startX - endX;
+                    const diffY = startY - endY;
+
+                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                        if (diffX > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.previousSlide();
+                        }
+                    }
+                });
+            }
+
+            goToSlide(index) {
+                if (this.isTransitioning || index === this.currentSlide || index < 0 || index >= this.totalSlides) {
+                    return;
+                }
+
+                this.isTransitioning = true;
+
+                this.slides[this.currentSlide].classList.remove('active');
+                this.dots[this.currentSlide].classList.remove('active');
+
+                this.currentSlide = index;
+
+                this.slides[this.currentSlide].classList.add('active');
+                this.dots[this.currentSlide].classList.add('active');
+
+                this.updateProgress();
+                this.updateNavigationButtons();
+
+                setTimeout(() => {
+                    this.isTransitioning = false;
+                }, 800);
+            }
+
+            nextSlide() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+
+            previousSlide() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+
+            updateProgress() {
+                const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
+                this.progressFill.style.width = `${progress}%`;
+            }
+
+            updateNavigationButtons() {
+                this.prevBtn.style.opacity = this.currentSlide === 0 ? '0.5' : '1';
+                this.nextBtn.style.opacity = this.currentSlide === this.totalSlides - 1 ? '0.5' : '1';
+            }
+        }
+
+        class FullscreenController {
+            constructor() {
+                this.initializeFullscreen();
+            }
+
+            initializeFullscreen() {
+                const fullscreenBtn = document.createElement('button');
+                fullscreenBtn.className = 'nav-btn fullscreen-btn';
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+                fullscreenBtn.title = 'Toggle Fullscreen';
+                
+                fullscreenBtn.addEventListener('click', () => {
+                    this.toggleFullscreen();
+                });
+
+                document.querySelector('.nav-controls').appendChild(fullscreenBtn);
+            }
+
+            toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.log('Error attempting to enable fullscreen:', err);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        class PresentationCounter {
+            constructor(presentation) {
+                this.presentation = presentation;
+                this.initializeCounter();
+                this.bindSlideChangeUpdate();
+            }
+
+            initializeCounter() {
+                const counter = document.createElement('div');
+                counter.className = 'slide-counter';
+                counter.innerHTML = `
+                    <span class="current-slide">${this.presentation.currentSlide + 1}</span>
+                    <span class="separator">/</span>
+                    <span class="total-slides">${this.presentation.totalSlides}</span>
+                `;
+                
+                document.querySelector('.nav-dots').appendChild(counter);
+            }
+
+            bindSlideChangeUpdate() {
+                const originalGoToSlide = this.presentation.goToSlide.bind(this.presentation);
+                this.presentation.goToSlide = (...args) => {
+                    originalGoToSlide(...args);
+                    this.updateCounter();
+                };
+            }
+
+            updateCounter() {
+                const currentSlide = document.querySelector('.current-slide');
+                if (currentSlide) {
+                    currentSlide.textContent = this.presentation.currentSlide + 1;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const presentation = new PresentationController();
+            const fullscreen = new FullscreenController();
+            const counter = new PresentationCounter(presentation);
+            
+            window.presentation = presentation;
+            
+            console.log('Spotify Live Presentation loaded successfully! 🎵');
+        });
+
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
