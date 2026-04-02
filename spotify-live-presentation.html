@@ -1,1195 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Live - Strategic Partnership | by Manas Ghodinde</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: #ffffff;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        .presentation-container {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .presentation-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 20px;
-            font-weight: 700;
-            color: #1DB954;
-        }
-
-        .nav-logo i {
-            font-size: 24px;
-        }
-
-        .nav-dots {
-            display: flex;
-            gap: 12px;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #1DB954;
-            transform: scale(1.2);
-        }
-
-        .nav-controls {
-            display: flex;
-            gap: 12px;
-        }
-
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #ffffff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-btn:hover {
-            background: #1DB954;
-            transform: scale(1.1);
-        }
-
-        .slides-container {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 50px 50px;
-        }
-
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-content {
-            max-width: 1200px;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .title-section {
-            text-align: center;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .logo-large {
-            font-size: 120px;
-            color: #1DB954;
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
-        }
-
-        .title-section h1 {
-            font-size: 72px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .title-section h2 {
-            font-size: 36px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        .subtitle {
-            font-size: 20px;
-            color: #b3b3b3;
-            margin-bottom: 40px;
-        }
-
-        .music-waves {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin-top: 40px;
-        }
-
-        .wave {
-            width: 6px;
-            height: 60px;
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-            border-radius: 3px;
-            animation: wave 1.5s ease-in-out infinite;
-        }
-
-        .wave:nth-child(2) { animation-delay: 0.1s; }
-        .wave:nth-child(3) { animation-delay: 0.2s; }
-        .wave:nth-child(4) { animation-delay: 0.3s; }
-        .wave:nth-child(5) { animation-delay: 0.4s; }
-
-        @keyframes wave {
-            0%, 100% { height: 20px; }
-            50% { height: 80px; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slide-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .slide-header h2 {
-            font-size: 48px;
-            font-weight: 700;
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .slide-header i {
-            font-size: 40px;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .summary-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .summary-card:hover {
-            transform: translateY(-10px);
-            border-color: #1DB954;
-            box-shadow: 0 20px 40px rgba(29, 185, 84, 0.2);
-        }
-
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 32px;
-            color: white;
-        }
-
-        .summary-card h3 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .summary-card p {
-            color: #b3b3b3;
-            line-height: 1.6;
-        }
-
-        .vision-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .vision-main {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .vision-main h3 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #1DB954;
-        }
-
-        .vision-main p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #b3b3b3;
-        }
-
-        .vision-pillars {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .pillar {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .pillar:hover {
-            border-color: #1DB954;
-            transform: translateX(10px);
-        }
-
-        .pillar-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .pillar h4 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .pillar p {
-            color: #b3b3b3;
-            line-height: 1.5;
-        }
-
-        .tracks-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 30px;
-        }
-
-        .track-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .track-section:hover {
-            transform: translateY(-5px);
-            border-color: #1DB954;
-        }
-
-        .track-header {
-            padding: 25px 30px;
-            color: white;
-            font-weight: 600;
-        }
-
-        .track-header.track-1 {
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-        }
-
-        .track-header.track-2 {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-        }
-
-        .track-header h3 {
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .track-content {
-            padding: 30px;
-        }
-
-        .track-item {
-            margin-bottom: 30px;
-        }
-
-        .track-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .track-item h4 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #1DB954;
-        }
-
-        .track-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .track-item li {
-            padding: 8px 0;
-            color: #b3b3b3;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .track-item li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #1DB954;
-            font-weight: bold;
-        }
-
-        .journey-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .journey-step {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .journey-step:hover {
-            transform: translateY(-10px);
-            border-color: #1DB954;
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 auto 20px;
-            color: white;
-        }
-
-        .step-content h4 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .step-content p {
-            color: #b3b3b3;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .step-icon {
-            font-size: 32px;
-            color: #1DB954;
-        }
-
-        .vision-timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .timeline-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .timeline-item:hover {
-            transform: translateY(-5px);
-            border-color: #1DB954;
-        }
-
-        .timeline-year {
-            font-size: 32px;
-            font-weight: 800;
-            color: #1DB954;
-            margin-bottom: 15px;
-        }
-
-        .timeline-content h4 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-
-        .timeline-content p {
-            color: #b3b3b3;
-            line-height: 1.6;
-        }
-
-        .vision-stats {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 40px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: 800;
-            color: #1DB954;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: #b3b3b3;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .progress-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #1DB954, #1ed760);
-            width: 16.67%;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .slide-counter {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-            color: #b3b3b3;
-            margin-left: 20px;
-        }
-        
-        .current-slide {
-            color: #1DB954;
-            font-weight: 600;
-        }
-        
-        .separator {
-            color: #b3b3b3;
-        }
-        
-        .total-slides {
-            color: #b3b3b3;
-        }
-        
-        .fullscreen-btn {
-            margin-left: 10px;
-        }
-
-        @media (max-width: 1024px) {
-            .slide {
-                padding: 100px 30px 50px;
-            }
-            
-            .title-section h1 {
-                font-size: 56px;
-            }
-            
-            .title-section h2 {
-                font-size: 28px;
-            }
-            
-            .slide-header h2 {
-                font-size: 36px;
-            }
-            
-            .vision-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .tracks-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .vision-timeline {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .vision-stats {
-                gap: 40px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .presentation-nav {
-                padding: 15px 20px;
-            }
-            
-            .nav-logo {
-                font-size: 16px;
-            }
-            
-            .nav-logo i {
-                font-size: 20px;
-            }
-            
-            .slide {
-                padding: 80px 20px 40px;
-            }
-            
-            .title-section h1 {
-                font-size: 40px;
-            }
-            
-            .title-section h2 {
-                font-size: 24px;
-            }
-            
-            .logo-large {
-                font-size: 80px;
-            }
-            
-            .slide-header h2 {
-                font-size: 28px;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .summary-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .vision-timeline {
-                grid-template-columns: 1fr;
-            }
-            
-            .vision-stats {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .journey-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotify Live — Strategic Partnership by Manas Ghodinde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1DB954;
+  --green-dim: rgba(29,185,84,0.1);
+  --green-border: rgba(29,185,84,0.22);
+  --black: #0a0a0a;
+  --surface: #111111;
+  --surface-2: #181818;
+  --surface-3: #222222;
+  --white: #f5f5f0;
+  --muted: #888880;
+  --faint: rgba(245,245,240,0.07);
+  --display: 'Montserrat', system-ui, sans-serif;
+  --body: 'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.5;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 3.5rem;
+  background: rgba(10,10,10,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--faint);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.spotify-icon { width: 24px; height: 24px; fill: var(--green); flex-shrink: 0; }
+.nav-wordmark { font-size: 0.88rem; font-weight: 500; color: var(--white); letter-spacing: 0.02em; }
+.nav-wordmark span { color: var(--green); }
+.nav-back { font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+.nav-back:hover { color: var(--green); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 7rem 3.5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-backdrop {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 75% 30%, rgba(29,185,84,0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 20% 80%, rgba(29,185,84,0.05) 0%, transparent 60%);
+}
+.hero-wave {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 200px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.hero-wave svg { width: 100%; height: 100%; }
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--faint) 1px, transparent 1px), linear-gradient(90deg, var(--faint) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--green-dim); border: 1px solid var(--green-border);
+  color: var(--green); font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 0.4rem 1rem; border-radius: 50px;
+  margin-bottom: 2.5rem; width: fit-content;
+  animation: fadeUp 0.7s 0.1s both;
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  font-weight: 900; line-height: 0.88;
+  letter-spacing: -0.04em; margin-bottom: 2rem;
+  text-transform: uppercase;
+  animation: fadeUp 0.7s 0.2s both;
+}
+.hero-title .green { color: var(--green); font-style: italic; display: block; text-align: center; }
+.hero-bottom {
+  display: flex; flex-direction: column; align-items: center; gap: 2rem;
+  animation: fadeUp 0.7s 0.35s both; text-align: center;
+}
+.hero-summary { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 560px; text-align: center; }
+.hero-summary strong { color: var(--white); font-weight: 400; }
+.hero-meta { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+.hero-byline { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; text-align: center; }
+.hero-byline strong { color: var(--green); display: block; font-size: 0.9rem; font-weight: 500; letter-spacing: 0; }
+.hero-stats { display: flex; gap: 2.5rem; }
+.hero-stat { text-align: center; }
+.stat-num { font-family: var(--display); font-size: 2rem; font-weight: 700; color: var(--green); line-height: 1; }
+.stat-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.2rem; }
+.scroll-cue {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  color: rgba(245,245,240,0.2); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+  animation: pulse-down 2.5s infinite;
+}
+.scroll-cue svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+@keyframes pulse-down {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50% { transform: translateX(-50%) translateY(5px); opacity: 0.7; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+hr.rule { border: none; border-top: 1px solid var(--faint); margin: 0; }
+
+/* SECTIONS */
+.section { padding: 7rem 3.5rem; max-width: 1160px; margin: 0 auto; }
+.eyebrow {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 1.5rem;
+}
+.eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--green-border); max-width: 60px; }
+.section-h { font-family: var(--display); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.03em; margin-bottom: 1.25rem; text-transform: uppercase; }
+.section-h em { color: var(--green); font-style: normal; }
+.section-sub { font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.8; margin-bottom: 3.5rem; }
+
+/* QUAD */
+.quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 18px; overflow: hidden; }
+.quad-card { background: var(--surface); padding: 2rem 1.75rem; transition: background 0.2s; }
+.quad-card:hover { background: var(--surface-2); }
+.quad-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+.quad-title { font-size: 0.88rem; font-weight: 500; color: var(--white); margin-bottom: 0.5rem; }
+.quad-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+/* PULL QUOTE */
+.pull-quote { border-left: 3px solid var(--green); padding: 1.75rem 2.5rem; margin: 3rem 0; background: var(--green-dim); border-radius: 0 14px 14px 0; }
+.pull-quote p { font-family: var(--display); font-size: clamp(1rem, 1.8vw, 1.2rem); font-weight: 700; line-height: 1.65; font-style: italic; color: var(--white); text-transform: none; letter-spacing: 0; }
+.pull-quote p em { color: var(--green); font-style: normal; }
+
+/* MISSION */
+.mission-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.mission-body { font-size: 0.97rem; color: var(--muted); line-height: 1.85; }
+.mission-body p + p { margin-top: 1.25rem; }
+.mission-body strong { color: var(--white); font-weight: 400; }
+.pillars { display: flex; flex-direction: column; gap: 0.85rem; }
+.pillar { display: flex; gap: 1rem; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--faint); border-radius: 12px; transition: border-color 0.2s, background 0.2s; }
+.pillar:hover { border-color: var(--green-border); background: var(--surface-2); }
+.pillar-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.15rem; }
+.pillar-title { font-size: 0.85rem; font-weight: 500; color: var(--white); margin-bottom: 0.2rem; }
+.pillar-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+/* TRACKS */
+.tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+.track { background: var(--surface); border: 1px solid var(--faint); border-radius: 20px; padding: 2.25rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+.track::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--green); opacity: 0; transition: opacity 0.2s; }
+.track:hover::before { opacity: 1; }
+.track:hover { border-color: var(--green-border); box-shadow: 0 8px 40px rgba(29,185,84,0.07); }
+.track.primary { border-color: var(--green-border); background: linear-gradient(135deg, rgba(29,185,84,0.06) 0%, var(--surface) 50%); }
+.track.primary::before { opacity: 1; }
+.track-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 0.4rem; }
+.track-name { font-family: var(--display); font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 1.5rem; line-height: 1.2; text-transform: uppercase; letter-spacing: -0.01em; }
+.track-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.track-list li { font-size: 0.83rem; color: var(--muted); padding-left: 1.2rem; position: relative; line-height: 1.55; }
+.track-list li::before { content: '—'; position: absolute; left: 0; color: var(--green); font-size: 0.7rem; }
+
+/* JOURNEY */
+.journey { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--faint); border-radius: 18px; overflow: hidden; }
+.journey-step { background: var(--surface); padding: 2rem 1.5rem; transition: background 0.2s; opacity: 0; transform: translateY(20px); transition: background 0.2s, opacity 0.5s ease, transform 0.5s ease; }
+.journey-step.in { opacity: 1; transform: none; }
+.journey-step:hover { background: var(--surface-2); }
+.journey-num { font-family: var(--display); font-size: 2.75rem; font-weight: 900; color: var(--green); opacity: 0.2; line-height: 1; margin-bottom: 1.25rem; letter-spacing: -0.03em; }
+.journey-title { font-size: 0.9rem; font-weight: 500; color: var(--white); margin-bottom: 0.5rem; }
+.journey-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+/* ROADMAP */
+.roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.roadmap-item { background: var(--surface); border: 1px solid var(--faint); border-radius: 14px; padding: 1.75rem 1.5rem; position: relative; transition: border-color 0.2s, background 0.2s, transform 0.4s ease, opacity 0.4s ease; opacity: 0; transform: translateY(24px); }
+.roadmap-item.in { opacity: 1; transform: none; }
+.roadmap-item:hover { border-color: var(--green-border); background: var(--surface-2); }
+.roadmap-item.now { border-color: var(--green-border); }
+.roadmap-item.now::after { content: 'Now'; position: absolute; top: 1rem; right: 1rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--green); padding: 0.2rem 0.6rem; border-radius: 50px; }
+.roadmap-year { font-family: var(--display); font-size: 1.35rem; font-weight: 900; color: var(--green); margin-bottom: 0.3rem; letter-spacing: -0.02em; }
+.roadmap-phase { font-size: 0.85rem; font-weight: 500; color: var(--white); margin-bottom: 0.75rem; }
+.roadmap-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
+
+/* CLOSING */
+.closing { background: var(--surface); border-top: 1px solid var(--faint); text-align: center; padding: 6rem 2rem; position: relative; overflow: hidden; }
+.closing::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(29,185,84,0.07) 0%, transparent 70%); pointer-events: none; }
+.closing-title { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.75rem); font-weight: 900; line-height: 1; margin-bottom: 1rem; position: relative; text-transform: uppercase; letter-spacing: -0.03em; }
+.closing-title em { color: var(--green); font-style: italic; }
+.closing-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 2.5rem; position: relative; }
+.closing-back { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--green); color: var(--black); padding: 0.9rem 2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.02em; text-decoration: none; transition: background 0.2s, transform 0.15s; position: relative; }
+.closing-back:hover { background: #1ed760; transform: translateY(-2px); }
+
+/* REVEAL */
+.reveal { opacity: 1; transform: none; transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.ready { opacity: 0; transform: translateY(32px); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 0.9rem 1.5rem; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .hero-bottom { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-meta { align-items: flex-start; }
+  .hero-stat { text-align: left; }
+  .section { padding: 5rem 1.5rem; }
+  .quad { grid-template-columns: 1fr 1fr; }
+  .mission-split { grid-template-columns: 1fr; gap: 2.5rem; }
+  .tracks { grid-template-columns: 1fr; }
+  .journey { grid-template-columns: 1fr 1fr; }
+  .roadmap { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .hero-title { font-size: clamp(3.5rem, 16vw, 5rem); }
+  .quad { grid-template-columns: 1fr; }
+  .journey { grid-template-columns: 1fr; }
+  .roadmap { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 1.25rem; }
+  .pull-quote { padding: 1.25rem 1.5rem; }
+}
+</style>
 </head>
 <body>
-    <div class="presentation-container">
-        <nav class="presentation-nav">
-            <div class="nav-logo">
-                <i class="fab fa-spotify"></i>
-                <span>Spotify Live</span>
-            </div>
-            <div class="nav-dots">
-                <span class="dot active" data-slide="0"></span>
-                <span class="dot" data-slide="1"></span>
-                <span class="dot" data-slide="2"></span>
-                <span class="dot" data-slide="3"></span>
-                <span class="dot" data-slide="4"></span>
-                <span class="dot" data-slide="5"></span>
-            </div>
-            <div class="nav-controls">
-                <button class="nav-btn" id="prevBtn">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="nav-btn" id="nextBtn">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </nav>
 
-        <div class="slides-container">
-            <div class="slide active" id="slide-0">
-                <div class="slide-content">
-                    <div class="title-section">
-                        <div class="logo-large">
-                            <i class="fab fa-spotify"></i>
-                        </div>
-                        <h1>Spotify Live</h1>
-                        <h2>Strategic Partnership Presentation</h2>
-                        <p class="subtitle">Revolutionizing Live Music Experience</p>
-                        <div class="music-waves">
-                            <div class="wave"></div>
-                            <div class="wave"></div>
-                            <div class="wave"></div>
-                            <div class="wave"></div>
-                            <div class="wave"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<nav>
+  <a href="/" class="nav-brand">
+    <svg class="spotify-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"/>
+    </svg>
+    <span class="nav-wordmark">Spotify <span>Live</span></span>
+  </a>
+  <a href="/" class="nav-back">← Portfolio</a>
+</nav>
 
-            <div class="slide" id="slide-1">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <h2><i class="fas fa-chart-line"></i> Executive Summary</h2>
-                    </div>
-                    <div class="summary-grid">
-                        <div class="summary-card">
-                            <div class="card-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3>Global Reach</h3>
-                            <p>Connect with millions of music lovers worldwide through live streaming experiences</p>
-                        </div>
-                        <div class="summary-card">
-                            <div class="card-icon">
-                                <i class="fas fa-music"></i>
-                            </div>
-                            <h3>Artist Empowerment</h3>
-                            <p>Provide artists with new revenue streams and direct fan engagement opportunities</p>
-                        </div>
-                        <div class="summary-card">
-                            <div class="card-icon">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <h3>Innovation</h3>
-                            <p>Pioneering the future of live music with cutting-edge technology and immersive experiences</p>
-                        </div>
-                        <div class="summary-card">
-                            <div class="card-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3>Partnership</h3>
-                            <p>Strategic collaboration to create sustainable, mutually beneficial relationships</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide" id="slide-2">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <h2><i class="fas fa-eye"></i> Strategic Vision</h2>
-                    </div>
-                    <div class="vision-content">
-                        <div class="vision-main">
-                            <h3>Our Mission</h3>
-                            <p>To democratize live music by creating accessible, high-quality streaming experiences that connect artists and fans in real-time, fostering a global community of music enthusiasts.</p>
-                        </div>
-                        <div class="vision-pillars">
-                            <div class="pillar">
-                                <div class="pillar-icon">
-                                    <i class="fas fa-globe"></i>
-                                </div>
-                                <div>
-                                    <h4>Global Accessibility</h4>
-                                    <p>Make live music available to anyone, anywhere, anytime</p>
-                                </div>
-                            </div>
-                            <div class="pillar">
-                                <div class="pillar-icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div>
-                                    <h4>Artist Growth</h4>
-                                    <p>Empower artists with tools and platforms for success</p>
-                                </div>
-                            </div>
-                            <div class="pillar">
-                                <div class="pillar-icon">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <div>
-                                    <h4>Fan Engagement</h4>
-                                    <p>Create meaningful connections between artists and audiences</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide" id="slide-3">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <h2><i class="fas fa-road"></i> Two-Track Partnership Strategy</h2>
-                    </div>
-                    <div class="tracks-container">
-                        <div class="track-section">
-                            <div class="track-header track-1">
-                                <h3><i class="fas fa-broadcast-tower"></i> Track 1: Spotify Studio Sessions</h3>
-                            </div>
-                            <div class="track-content">
-                                <div class="track-item">
-                                    <h4>Partnership Framework</h4>
-                                    <ul>
-                                        <li>Exclusive studio recording sessions</li>
-                                        <li>High-quality production facilities</li>
-                                        <li>Professional audio engineering support</li>
-                                        <li>Multi-platform content distribution</li>
-                                    </ul>
-                                </div>
-                                <div class="track-item">
-                                    <h4>Format Features</h4>
-                                    <ul>
-                                        <li>Intimate acoustic performances</li>
-                                        <li>Behind-the-scenes content</li>
-                                        <li>Fan Q&A integration</li>
-                                        <li>Merchandise integration</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="track-section">
-                            <div class="track-header track-2">
-                                <h3><i class="fas fa-search"></i> Track 2: Spotify Spotlight Program</h3>
-                            </div>
-                            <div class="track-content">
-                                <div class="track-item">
-                                    <h4>Artist Selection Criteria</h4>
-                                    <ul>
-                                        <li>Emerging talent with unique sound</li>
-                                        <li>Active social media presence</li>
-                                        <li>Consistent content creation</li>
-                                        <li>Fan engagement metrics</li>
-                                    </ul>
-                                </div>
-                                <div class="track-item">
-                                    <h4>Implementation Structure</h4>
-                                    <ul>
-                                        <li>Quarterly artist discovery cycles</li>
-                                        <li>Mentorship and development programs</li>
-                                        <li>Marketing and promotion support</li>
-                                        <li>Performance analytics and insights</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide" id="slide-4">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <h2><i class="fas fa-route"></i> User Experience Journey</h2>
-                    </div>
-                    <div class="journey-container">
-                        <div class="journey-step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>Discovery</h4>
-                                <p>Users discover live sessions through personalized recommendations and trending content</p>
-                                <div class="step-icon">
-                                    <i class="fas fa-compass"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="journey-step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h4>Engagement</h4>
-                                <p>Interactive features allow real-time participation, comments, and reactions</p>
-                                <div class="step-icon">
-                                    <i class="fas fa-comments"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="journey-step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h4>Connection</h4>
-                                <p>Fans connect with artists through exclusive content and community features</p>
-                                <div class="step-icon">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="journey-step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h4>Retention</h4>
-                                <p>Ongoing engagement through follow-up content and exclusive experiences</p>
-                                <div class="step-icon">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide" id="slide-5">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <h2><i class="fas fa-crystal-ball"></i> Long Term Vision</h2>
-                    </div>
-                    <div class="vision-timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-year">2024</div>
-                            <div class="timeline-content">
-                                <h4>Foundation Phase</h4>
-                                <p>Launch core platform features and establish initial artist partnerships</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2025</div>
-                            <div class="timeline-content">
-                                <h4>Expansion Phase</h4>
-                                <p>Scale to global markets and introduce advanced interactive features</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2026</div>
-                            <div class="timeline-content">
-                                <h4>Innovation Phase</h4>
-                                <p>Integrate AR/VR experiences and AI-powered personalization</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-year">2027+</div>
-                            <div class="timeline-content">
-                                <h4>Transformation Phase</h4>
-                                <p>Become the leading platform for live music experiences worldwide</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="vision-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">100M+</div>
-                            <div class="stat-label">Active Users</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">50K+</div>
-                            <div class="stat-label">Artists</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">1M+</div>
-                            <div class="stat-label">Live Sessions</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
+<div class="hero">
+  <div class="hero-backdrop"></div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        .bar { fill: rgba(29,185,84,0.15); rx: 2; }
+        @keyframes wave-pulse {
+          0%, 100% { transform: scaleY(0.3); }
+          50% { transform: scaleY(1); }
+        }
+      </style>
+      <g transform="translate(0,100)">
+        <rect class="bar" x="0" y="0" width="8" rx="4" height="80" transform-origin="4 0" style="transform: scaleY(1.00); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 0.00s;"/><rect class="bar" x="16" y="0" width="8" rx="4" height="80" transform-origin="20 0" style="transform: scaleY(0.92); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 0.08s;"/><rect class="bar" x="32" y="0" width="8" rx="4" height="80" transform-origin="36 0" style="transform: scaleY(0.84); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 0.16s;"/><rect class="bar" x="48" y="0" width="8" rx="4" height="80" transform-origin="52 0" style="transform: scaleY(0.76); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 0.24s;"/><rect class="bar" x="64" y="0" width="8" rx="4" height="80" transform-origin="68 0" style="transform: scaleY(0.68); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 0.32s;"/><rect class="bar" x="80" y="0" width="8" rx="4" height="80" transform-origin="84 0" style="transform: scaleY(0.60); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 0.40s;"/><rect class="bar" x="96" y="0" width="8" rx="4" height="80" transform-origin="100 0" style="transform: scaleY(0.52); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 0.48s;"/><rect class="bar" x="112" y="0" width="8" rx="4" height="80" transform-origin="116 0" style="transform: scaleY(0.44); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 0.56s;"/><rect class="bar" x="128" y="0" width="8" rx="4" height="80" transform-origin="132 0" style="transform: scaleY(0.36); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 0.64s;"/><rect class="bar" x="144" y="0" width="8" rx="4" height="80" transform-origin="148 0" style="transform: scaleY(0.28); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 0.72s;"/><rect class="bar" x="160" y="0" width="8" rx="4" height="80" transform-origin="164 0" style="transform: scaleY(0.20); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 0.80s;"/><rect class="bar" x="176" y="0" width="8" rx="4" height="80" transform-origin="180 0" style="transform: scaleY(0.28); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 0.88s;"/><rect class="bar" x="192" y="0" width="8" rx="4" height="80" transform-origin="196 0" style="transform: scaleY(0.36); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 0.96s;"/><rect class="bar" x="208" y="0" width="8" rx="4" height="80" transform-origin="212 0" style="transform: scaleY(0.44); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 1.04s;"/><rect class="bar" x="224" y="0" width="8" rx="4" height="80" transform-origin="228 0" style="transform: scaleY(0.52); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 1.12s;"/><rect class="bar" x="240" y="0" width="8" rx="4" height="80" transform-origin="244 0" style="transform: scaleY(0.60); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 1.20s;"/><rect class="bar" x="256" y="0" width="8" rx="4" height="80" transform-origin="260 0" style="transform: scaleY(0.68); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 1.28s;"/><rect class="bar" x="272" y="0" width="8" rx="4" height="80" transform-origin="276 0" style="transform: scaleY(0.76); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 1.36s;"/><rect class="bar" x="288" y="0" width="8" rx="4" height="80" transform-origin="292 0" style="transform: scaleY(0.84); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 1.44s;"/><rect class="bar" x="304" y="0" width="8" rx="4" height="80" transform-origin="308 0" style="transform: scaleY(0.92); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 1.52s;"/><rect class="bar" x="320" y="0" width="8" rx="4" height="80" transform-origin="324 0" style="transform: scaleY(1.00); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 1.60s;"/><rect class="bar" x="336" y="0" width="8" rx="4" height="80" transform-origin="340 0" style="transform: scaleY(0.92); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 1.68s;"/><rect class="bar" x="352" y="0" width="8" rx="4" height="80" transform-origin="356 0" style="transform: scaleY(0.84); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 1.76s;"/><rect class="bar" x="368" y="0" width="8" rx="4" height="80" transform-origin="372 0" style="transform: scaleY(0.76); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 1.84s;"/><rect class="bar" x="384" y="0" width="8" rx="4" height="80" transform-origin="388 0" style="transform: scaleY(0.68); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 1.92s;"/><rect class="bar" x="400" y="0" width="8" rx="4" height="80" transform-origin="404 0" style="transform: scaleY(0.60); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 0.00s;"/><rect class="bar" x="416" y="0" width="8" rx="4" height="80" transform-origin="420 0" style="transform: scaleY(0.52); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 0.08s;"/><rect class="bar" x="432" y="0" width="8" rx="4" height="80" transform-origin="436 0" style="transform: scaleY(0.44); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 0.16s;"/><rect class="bar" x="448" y="0" width="8" rx="4" height="80" transform-origin="452 0" style="transform: scaleY(0.36); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 0.24s;"/><rect class="bar" x="464" y="0" width="8" rx="4" height="80" transform-origin="468 0" style="transform: scaleY(0.28); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 0.32s;"/><rect class="bar" x="480" y="0" width="8" rx="4" height="80" transform-origin="484 0" style="transform: scaleY(0.20); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 0.40s;"/><rect class="bar" x="496" y="0" width="8" rx="4" height="80" transform-origin="500 0" style="transform: scaleY(0.28); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 0.48s;"/><rect class="bar" x="512" y="0" width="8" rx="4" height="80" transform-origin="516 0" style="transform: scaleY(0.36); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 0.56s;"/><rect class="bar" x="528" y="0" width="8" rx="4" height="80" transform-origin="532 0" style="transform: scaleY(0.44); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 0.64s;"/><rect class="bar" x="544" y="0" width="8" rx="4" height="80" transform-origin="548 0" style="transform: scaleY(0.52); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 0.72s;"/><rect class="bar" x="560" y="0" width="8" rx="4" height="80" transform-origin="564 0" style="transform: scaleY(0.60); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 0.80s;"/><rect class="bar" x="576" y="0" width="8" rx="4" height="80" transform-origin="580 0" style="transform: scaleY(0.68); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 0.88s;"/><rect class="bar" x="592" y="0" width="8" rx="4" height="80" transform-origin="596 0" style="transform: scaleY(0.76); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 0.96s;"/><rect class="bar" x="608" y="0" width="8" rx="4" height="80" transform-origin="612 0" style="transform: scaleY(0.84); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 1.04s;"/><rect class="bar" x="624" y="0" width="8" rx="4" height="80" transform-origin="628 0" style="transform: scaleY(0.92); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 1.12s;"/><rect class="bar" x="640" y="0" width="8" rx="4" height="80" transform-origin="644 0" style="transform: scaleY(1.00); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 1.20s;"/><rect class="bar" x="656" y="0" width="8" rx="4" height="80" transform-origin="660 0" style="transform: scaleY(0.92); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 1.28s;"/><rect class="bar" x="672" y="0" width="8" rx="4" height="80" transform-origin="676 0" style="transform: scaleY(0.84); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 1.36s;"/><rect class="bar" x="688" y="0" width="8" rx="4" height="80" transform-origin="692 0" style="transform: scaleY(0.76); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 1.44s;"/><rect class="bar" x="704" y="0" width="8" rx="4" height="80" transform-origin="708 0" style="transform: scaleY(0.68); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 1.52s;"/><rect class="bar" x="720" y="0" width="8" rx="4" height="80" transform-origin="724 0" style="transform: scaleY(0.60); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 1.60s;"/><rect class="bar" x="736" y="0" width="8" rx="4" height="80" transform-origin="740 0" style="transform: scaleY(0.52); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 1.68s;"/><rect class="bar" x="752" y="0" width="8" rx="4" height="80" transform-origin="756 0" style="transform: scaleY(0.44); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 1.76s;"/><rect class="bar" x="768" y="0" width="8" rx="4" height="80" transform-origin="772 0" style="transform: scaleY(0.36); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 1.84s;"/><rect class="bar" x="784" y="0" width="8" rx="4" height="80" transform-origin="788 0" style="transform: scaleY(0.28); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 1.92s;"/><rect class="bar" x="800" y="0" width="8" rx="4" height="80" transform-origin="804 0" style="transform: scaleY(0.20); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 0.00s;"/><rect class="bar" x="816" y="0" width="8" rx="4" height="80" transform-origin="820 0" style="transform: scaleY(0.28); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 0.08s;"/><rect class="bar" x="832" y="0" width="8" rx="4" height="80" transform-origin="836 0" style="transform: scaleY(0.36); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 0.16s;"/><rect class="bar" x="848" y="0" width="8" rx="4" height="80" transform-origin="852 0" style="transform: scaleY(0.44); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 0.24s;"/><rect class="bar" x="864" y="0" width="8" rx="4" height="80" transform-origin="868 0" style="transform: scaleY(0.52); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 0.32s;"/><rect class="bar" x="880" y="0" width="8" rx="4" height="80" transform-origin="884 0" style="transform: scaleY(0.60); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 0.40s;"/><rect class="bar" x="896" y="0" width="8" rx="4" height="80" transform-origin="900 0" style="transform: scaleY(0.68); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 0.48s;"/><rect class="bar" x="912" y="0" width="8" rx="4" height="80" transform-origin="916 0" style="transform: scaleY(0.76); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 0.56s;"/><rect class="bar" x="928" y="0" width="8" rx="4" height="80" transform-origin="932 0" style="transform: scaleY(0.84); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 0.64s;"/><rect class="bar" x="944" y="0" width="8" rx="4" height="80" transform-origin="948 0" style="transform: scaleY(0.92); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 0.72s;"/><rect class="bar" x="960" y="0" width="8" rx="4" height="80" transform-origin="964 0" style="transform: scaleY(1.00); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 0.80s;"/><rect class="bar" x="976" y="0" width="8" rx="4" height="80" transform-origin="980 0" style="transform: scaleY(0.92); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 0.88s;"/><rect class="bar" x="992" y="0" width="8" rx="4" height="80" transform-origin="996 0" style="transform: scaleY(0.84); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 0.96s;"/><rect class="bar" x="1008" y="0" width="8" rx="4" height="80" transform-origin="1012 0" style="transform: scaleY(0.76); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 1.04s;"/><rect class="bar" x="1024" y="0" width="8" rx="4" height="80" transform-origin="1028 0" style="transform: scaleY(0.68); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 1.12s;"/><rect class="bar" x="1040" y="0" width="8" rx="4" height="80" transform-origin="1044 0" style="transform: scaleY(0.60); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 1.20s;"/><rect class="bar" x="1056" y="0" width="8" rx="4" height="80" transform-origin="1060 0" style="transform: scaleY(0.52); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 1.28s;"/><rect class="bar" x="1072" y="0" width="8" rx="4" height="80" transform-origin="1076 0" style="transform: scaleY(0.44); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 1.36s;"/><rect class="bar" x="1088" y="0" width="8" rx="4" height="80" transform-origin="1092 0" style="transform: scaleY(0.36); animation: wave-pulse 2.25s ease-in-out infinite; animation-delay: 1.44s;"/><rect class="bar" x="1104" y="0" width="8" rx="4" height="80" transform-origin="1108 0" style="transform: scaleY(0.28); animation: wave-pulse 2.40s ease-in-out infinite; animation-delay: 1.52s;"/><rect class="bar" x="1120" y="0" width="8" rx="4" height="80" transform-origin="1124 0" style="transform: scaleY(0.20); animation: wave-pulse 1.50s ease-in-out infinite; animation-delay: 1.60s;"/><rect class="bar" x="1136" y="0" width="8" rx="4" height="80" transform-origin="1140 0" style="transform: scaleY(0.28); animation: wave-pulse 1.65s ease-in-out infinite; animation-delay: 1.68s;"/><rect class="bar" x="1152" y="0" width="8" rx="4" height="80" transform-origin="1156 0" style="transform: scaleY(0.36); animation: wave-pulse 1.80s ease-in-out infinite; animation-delay: 1.76s;"/><rect class="bar" x="1168" y="0" width="8" rx="4" height="80" transform-origin="1172 0" style="transform: scaleY(0.44); animation: wave-pulse 1.95s ease-in-out infinite; animation-delay: 1.84s;"/><rect class="bar" x="1184" y="0" width="8" rx="4" height="80" transform-origin="1188 0" style="transform: scaleY(0.52); animation: wave-pulse 2.10s ease-in-out infinite; animation-delay: 1.92s;"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">
+    <svg width="7" height="7" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="currentColor"/></svg>
+    Product Strategy Case Study
+  </div>
+  <h1 class="hero-title">
+    Spotify
+    <span class="green">Live.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-summary">Spotify dominates recorded music but has <strong>no stake in live</strong> — the highest-margin, highest-loyalty experience in music. This is the strategy for capturing it.</p>
+    <div class="hero-meta">
+      <div class="hero-byline">Strategic Partnership Framework<br><strong>Manas Ghodinde</strong></div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="stat-num" data-count="100" data-suffix="M+">100M+</div><div class="stat-label">Target Users</div></div>
+        <div class="hero-stat"><div class="stat-num" data-count="50" data-suffix="K+">50K+</div><div class="stat-label">Artists</div></div>
+        <div class="hero-stat"><div class="stat-num" data-count="1" data-suffix="M+">1M+</div><div class="stat-label">Live Sessions</div></div>
+      </div>
     </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</div>
 
-    <script>
-        class PresentationController {
-            constructor() {
-                this.currentSlide = 0;
-                this.totalSlides = 6;
-                this.isTransitioning = false;
-                
-                this.initializeElements();
-                this.bindEvents();
-                this.updateProgress();
-            }
+<hr class="rule">
 
-            initializeElements() {
-                this.slides = document.querySelectorAll('.slide');
-                this.dots = document.querySelectorAll('.dot');
-                this.prevBtn = document.getElementById('prevBtn');
-                this.nextBtn = document.getElementById('nextBtn');
-                this.progressFill = document.querySelector('.progress-fill');
-            }
+<div class="section reveal">
+  <div class="eyebrow">01 — Executive Summary</div>
+  <h2 class="section-h">The gap is obvious.<br><em>Nobody has filled it.</em></h2>
+  <p class="section-sub">Spotify ends at the stream. The moment a fan buys a ticket, pays for merch, or queues outside a venue — Spotify gets nothing. Live is where artists make real money and where fans feel real loyalty.</p>
+  <div class="quad">
+    <div class="quad-card"><div class="quad-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="quad-title">The Problem</div><div class="quad-desc">Spotify's revenue stops at streaming. Live music — a $31B+ industry — sits entirely outside their platform.</div></div>
+    <div class="quad-card"><div class="quad-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="quad-title">The Opportunity</div><div class="quad-desc">Spotify has the data, the audience, and the artist relationships. It just needs the product to connect them live.</div></div>
+    <div class="quad-card"><div class="quad-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="quad-title">The Approach</div><div class="quad-desc">Two partnership tracks — one for established artists, one for emerging talent — each with distinct goals.</div></div>
+    <div class="quad-card"><div class="quad-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="quad-title">The Payoff</div><div class="quad-desc">Artists earn more. Fans get exclusive access. Spotify becomes indispensable — not just convenient.</div></div>
+  </div>
+</div>
 
-            bindEvents() {
-                this.prevBtn.addEventListener('click', () => this.previousSlide());
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
+<hr class="rule">
 
-                this.dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => this.goToSlide(index));
-                });
+<div class="section reveal">
+  <div class="eyebrow">02 — Strategic Vision</div>
+  <h2 class="section-h">Not just streaming.<br><em>The full music relationship.</em></h2>
+  <div class="mission-split">
+    <div class="mission-body">
+      <p>Right now, Spotify is where you discover music. You find an artist, stream their album, maybe save them to a playlist. Then you go to a completely different app to buy a ticket. Another to follow them. Another to buy merch.</p>
+      <p>Every one of those handoffs is a moment Spotify loses you. The goal of Spotify Live is to close those loops — so the platform that introduced you to the artist is also the platform that connects you when they play live.</p>
+      <p><strong>Make Spotify the place where the fan-artist relationship lives, not just where it starts.</strong></p>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div><div class="pillar-title">Global Accessibility</div><div class="pillar-desc">Live music for fans who can't attend in person — same energy, different access point.</div></div></div>
+      <div class="pillar"><div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div><div><div class="pillar-title">Artist Empowerment</div><div class="pillar-desc">New revenue beyond streams. Spotify becomes a partner in the whole career, not just discovery.</div></div></div>
+      <div class="pillar"><div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="pillar-title">Real Fan Engagement</div><div class="pillar-desc">Live interaction passive streaming can't replicate — Q&As, exclusive drops, behind-the-scenes.</div></div></div>
+      <div class="pillar"><div class="pillar-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><div class="pillar-title">Platform Lock-In</div><div class="pillar-desc">When concerts, merch, and exclusive content all live on Spotify — why would you leave?</div></div></div>
+    </div>
+  </div>
+</div>
 
-                document.addEventListener('keydown', (e) => {
-                    if (this.isTransitioning) return;
-                    
-                    switch(e.key) {
-                        case 'ArrowLeft':
-                            e.preventDefault();
-                            this.previousSlide();
-                            break;
-                        case 'ArrowRight':
-                        case ' ':
-                            e.preventDefault();
-                            this.nextSlide();
-                            break;
-                        case 'Home':
-                            e.preventDefault();
-                            this.goToSlide(0);
-                            break;
-                        case 'End':
-                            e.preventDefault();
-                            this.goToSlide(this.totalSlides - 1);
-                            break;
-                    }
-                });
+<hr class="rule">
 
-                let startX = 0;
-                let startY = 0;
+<div class="section reveal">
+  <div class="eyebrow">03 — Partnership Strategy</div>
+  <h2 class="section-h">One product.<br><em>Two very different goals.</em></h2>
+  <p class="section-sub">Established artists and emerging talent need completely different things from a live platform. Treating them the same would serve neither well.</p>
+  <div class="tracks">
+    <div class="track primary">
+      <div class="track-num">Track 01</div>
+      <div class="track-name">Spotify Studio Sessions</div>
+      <ul class="track-list">
+        <li>Exclusive studio recording sessions with high-quality production</li>
+        <li>Professional audio engineering and Spotify-branded live sets</li>
+        <li>Intimate acoustic performances streamed to global fanbase</li>
+        <li>Behind-the-scenes content and artist storytelling</li>
+        <li>Fan Q&A integration during live sessions</li>
+        <li>Merchandise drops tied to live events</li>
+        <li>Multi-platform content distribution rights</li>
+      </ul>
+    </div>
+    <div class="track">
+      <div class="track-num">Track 02</div>
+      <div class="track-name">Spotify Spotlight Program</div>
+      <ul class="track-list">
+        <li>Quarterly discovery cycles for emerging talent</li>
+        <li>Mentorship from established artists in the Spotify network</li>
+        <li>Marketing and algorithmic promotion support</li>
+        <li>Performance analytics and audience insights</li>
+        <li>Access to Spotify's production infrastructure</li>
+        <li>Development programs for touring and live skills</li>
+        <li>Clear pathway to Studio Sessions as audience grows</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pull-quote">
+    <p>The Spotlight Program isn't charity — it's <em>Spotify's next artist pipeline</em>. Every emerging artist developed here becomes a Studio Sessions candidate in 12–24 months. The platform funds its own future supply of exclusive content.</p>
+  </div>
+</div>
 
-                document.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                });
+<hr class="rule">
 
-                document.addEventListener('touchend', (e) => {
-                    if (this.isTransitioning) return;
+<div class="section reveal">
+  <div class="eyebrow">04 — User Experience</div>
+  <h2 class="section-h">From first listen<br><em>to live connection.</em></h2>
+  <p class="section-sub">Every step is something a fan already wants to do. Spotify just makes it easier and keeps it in one place.</p>
+  <div class="journey">
+    <div class="journey-step"><div class="journey-num">01</div><div class="journey-title">Discovery</div><div class="journey-desc">Personalised recommendations surface live sessions from artists already in your library. "They're going live tonight."</div></div>
+    <div class="journey-step"><div class="journey-num">02</div><div class="journey-title">Engagement</div><div class="journey-desc">Real-time comments, reactions, and Q&A. Not passive — participatory. The artist can actually see you in the room.</div></div>
+    <div class="journey-step"><div class="journey-num">03</div><div class="journey-title">Connection</div><div class="journey-desc">Exclusive post-show content, merch drops, and early ticket access for fans who attended the live stream.</div></div>
+    <div class="journey-step"><div class="journey-num">04</div><div class="journey-title">Retention</div><div class="journey-desc">Notifications for future sessions, saved recordings in your library. The loop closes. You come back.</div></div>
+  </div>
+</div>
 
-                    const endX = e.changedTouches[0].clientX;
-                    const endY = e.changedTouches[0].clientY;
-                    const diffX = startX - endX;
-                    const diffY = startY - endY;
+<hr class="rule">
 
-                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-                        if (diffX > 0) {
-                            this.nextSlide();
-                        } else {
-                            this.previousSlide();
-                        }
-                    }
-                });
-            }
+<div class="section reveal">
+  <div class="eyebrow">05 — Long-Term Vision</div>
+  <h2 class="section-h">Start focused.<br><em>Scale deliberately.</em></h2>
+  <p class="section-sub">The roadmap is phased — prove the product works before adding complexity. Every phase earns the next one.</p>
+  <div class="roadmap">
+    <div class="roadmap-item now"><div class="roadmap-year">2026</div><div class="roadmap-phase">Foundation</div><div class="roadmap-desc">Launch core platform. 20 Studio Sessions with established artists. Spotlight pilot with 50 emerging artists.</div></div>
+    <div class="roadmap-item"><div class="roadmap-year">2027</div><div class="roadmap-phase">Expansion</div><div class="roadmap-desc">Scale to global markets. Ticket and merch integration. Advanced interactive features. 500+ Spotlight artists.</div></div>
+    <div class="roadmap-item"><div class="roadmap-year">2028</div><div class="roadmap-phase">Innovation</div><div class="roadmap-desc">AR/VR live experience pilots. AI-powered session discovery. Premium super-fan tier launched.</div></div>
+    <div class="roadmap-item"><div class="roadmap-year">2029+</div><div class="roadmap-phase">Platform</div><div class="roadmap-desc">Spotify becomes the primary live music destination globally — not a supplement to attending, an alternative to it.</div></div>
+  </div>
+</div>
 
-            goToSlide(index) {
-                if (this.isTransitioning || index === this.currentSlide || index < 0 || index >= this.totalSlides) {
-                    return;
-                }
+<div class="closing">
+  <h2 class="closing-title">Built by <em>Manas Ghodinde</em></h2>
+  <p class="closing-sub">MSc Business Analytics · University of Galway · 2025</p>
+  <a href="/" class="closing-back">← Back to Portfolio</a>
+</div>
 
-                this.isTransitioning = true;
+<script>
+(function() {
+  var reveals = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+    return;
+  }
+  reveals.forEach(function(el) { el.classList.add('ready'); });
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        e.target.classList.remove('ready');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(function(el) { obs.observe(el); });
+  setTimeout(function() {
+    reveals.forEach(function(el) { el.classList.add('visible'); el.classList.remove('ready'); });
+  }, 2500);
+  // ── COUNTER ──
+  function animateCounter(el) {
+    var raw = el.getAttribute('data-count');
+    var suffix = el.getAttribute('data-suffix') || '';
+    var target = parseFloat(raw);
+    var duration = 1600;
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var val = target * ease;
+      el.textContent = (val < 10 ? val.toFixed(1) : Math.floor(val)) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  document.querySelectorAll('[data-count]').forEach(function(el) { animateCounter(el); });
 
-                this.slides[this.currentSlide].classList.remove('active');
-                this.dots[this.currentSlide].classList.remove('active');
-
-                this.currentSlide = index;
-
-                this.slides[this.currentSlide].classList.add('active');
-                this.dots[this.currentSlide].classList.add('active');
-
-                this.updateProgress();
-                this.updateNavigationButtons();
-
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 800);
-            }
-
-            nextSlide() {
-                if (this.currentSlide < this.totalSlides - 1) {
-                    this.goToSlide(this.currentSlide + 1);
-                }
-            }
-
-            previousSlide() {
-                if (this.currentSlide > 0) {
-                    this.goToSlide(this.currentSlide - 1);
-                }
-            }
-
-            updateProgress() {
-                const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
-                this.progressFill.style.width = `${progress}%`;
-            }
-
-            updateNavigationButtons() {
-                this.prevBtn.style.opacity = this.currentSlide === 0 ? '0.5' : '1';
-                this.nextBtn.style.opacity = this.currentSlide === this.totalSlides - 1 ? '0.5' : '1';
-            }
-        }
-
-        class FullscreenController {
-            constructor() {
-                this.initializeFullscreen();
-            }
-
-            initializeFullscreen() {
-                const fullscreenBtn = document.createElement('button');
-                fullscreenBtn.className = 'nav-btn fullscreen-btn';
-                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-                fullscreenBtn.title = 'Toggle Fullscreen';
-                
-                fullscreenBtn.addEventListener('click', () => {
-                    this.toggleFullscreen();
-                });
-
-                document.querySelector('.nav-controls').appendChild(fullscreenBtn);
-            }
-
-            toggleFullscreen() {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen().catch(err => {
-                        console.log('Error attempting to enable fullscreen:', err);
-                    });
-                } else {
-                    document.exitFullscreen();
-                }
-            }
-        }
-
-        class PresentationCounter {
-            constructor(presentation) {
-                this.presentation = presentation;
-                this.initializeCounter();
-                this.bindSlideChangeUpdate();
-            }
-
-            initializeCounter() {
-                const counter = document.createElement('div');
-                counter.className = 'slide-counter';
-                counter.innerHTML = `
-                    <span class="current-slide">${this.presentation.currentSlide + 1}</span>
-                    <span class="separator">/</span>
-                    <span class="total-slides">${this.presentation.totalSlides}</span>
-                `;
-                
-                document.querySelector('.nav-dots').appendChild(counter);
-            }
-
-            bindSlideChangeUpdate() {
-                const originalGoToSlide = this.presentation.goToSlide.bind(this.presentation);
-                this.presentation.goToSlide = (...args) => {
-                    originalGoToSlide(...args);
-                    this.updateCounter();
-                };
-            }
-
-            updateCounter() {
-                const currentSlide = document.querySelector('.current-slide');
-                if (currentSlide) {
-                    currentSlide.textContent = this.presentation.currentSlide + 1;
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const presentation = new PresentationController();
-            const fullscreen = new FullscreenController();
-            const counter = new PresentationCounter(presentation);
-            
-            window.presentation = presentation;
-            
-            console.log('Spotify Live Presentation loaded successfully! 🎵');
+  // ── JOURNEY STAGGER ──
+  var journeySteps = document.querySelectorAll('.journey-step');
+  if ('IntersectionObserver' in window) {
+    var jObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        journeySteps.forEach(function(step, i) {
+          setTimeout(function() { step.classList.add('in'); }, i * 120);
         });
+        jObs.disconnect();
+      }
+    }, { threshold: 0.15 });
+    if (journeySteps[0]) jObs.observe(journeySteps[0].parentElement);
+  } else {
+    journeySteps.forEach(function(s) { s.classList.add('in'); });
+  }
 
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
+  // ── ROADMAP STAGGER ──
+  var rmItems = document.querySelectorAll('.roadmap-item');
+  if ('IntersectionObserver' in window) {
+    var rmObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        rmItems.forEach(function(item, i) {
+          setTimeout(function() { item.classList.add('in'); }, i * 100);
         });
-    </script>
+        rmObs.disconnect();
+      }
+    }, { threshold: 0.15 });
+    if (rmItems[0]) rmObs.observe(rmItems[0].parentElement);
+  } else {
+    rmItems.forEach(function(s) { s.classList.add('in'); });
+  }
+
+})();
+</script>
 </body>
 </html>
